@@ -5,6 +5,7 @@ Blite is a decentralized forum where anybody may submit information that has bee
 Github: DaniiRix <br/>
 Email: danielrix01@protonmail.com <br/>
 Wallet: 0x8EAe1CBf2B211abd3401c6280eE27748c6fAB6eF <br/>
+Contracts are stored at: 0xbb48b22feA8E4b0B36bD5eFDE06Cd37B993d3855
 
 ### How blite used IPFS?
 
@@ -14,9 +15,7 @@ Blite has used the service of web3.storage to interact with the IPFS, we make a 
 
 The code for this part is written in src/utils/index.js
 
-#### Website: [Blite](https://ancient-bush-6883.on.fleek.co/)
-
-#### Video: [Video]()
+#### Video: [https://www.dropbox.com/s/xss5nooju7qmj4n/Blite.mov?dl=0](https://www.dropbox.com/s/xss5nooju7qmj4n/Blite.mov?dl=0)
 
 #### Running the app
 
