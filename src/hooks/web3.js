@@ -2,9 +2,26 @@ import { useState } from 'react';
 import { ethers } from 'ethers';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import * as UAuthWeb3Modal from '@uauth/web3modal';
+import UAuth from '@uauth/js';
+
+export const uauthOptions = new UAuth({
+  clientID: process.env.NEXT_PUBLIC_UNSTOPPABLE,
+  redirectUri:
+    process.env.NODE_ENV === 'production'
+      ? 'https://blite-sage.vercel.app/'
+      : 'http://localhost:3000',
+  scope: 'openid wallet',
+});
 
 export function useWeb3Modal() {
   const providerOptions = {
+    'custom-uauth': {
+      display: UAuthWeb3Modal.display,
+      connector: UAuthWeb3Modal.connector,
+      package: UAuth,
+      options: uauthOptions,
+    },
     walletconnect: {
       package: WalletConnectProvider,
       options: {
@@ -20,13 +37,16 @@ export function useWeb3Modal() {
     cacheProvider: true,
     providerOptions,
   });
+
+  UAuthWeb3Modal.registerWeb3Modal(web3Modal);
+
   const [provider, setProvider] = useState(undefined);
   const [signer, setSigner] = useState(null);
   const [error, setError] = useState(null);
 
-  if (web3Modal.cachedProvider && !provider) {
-    connectWallet();
-  }
+  // if (web3Modal.cachedProvider && !provider) {
+  //   connectWallet();
+  // }
 
   async function connectWallet() {
     try {
