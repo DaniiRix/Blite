@@ -6,12 +6,13 @@ import * as UAuthWeb3Modal from '@uauth/web3modal';
 import UAuth from '@uauth/js';
 
 export const uauthOptions = {
-  clientID: '5aa2ab37-ed18-4756-982a-19c91964fb49',
-  redirectUri: 'https://blite-sage.vercel.app/',
+  clientID: 'ea469fad-2b37-4bf3-91d8-7316f342ca9b',
+  redirectUri:
+    process.env.NODE_ENV === 'production'
+      ? 'https://blite-sage.vercel.app/'
+      : 'http://localhost:3000',
   scope: 'openid wallet',
 };
-
-console.log(process.env.NODE_ENV);
 
 export function useWeb3Modal() {
   const providerOptions = {
