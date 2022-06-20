@@ -1,5 +1,12 @@
 ## Blite
 
+### Unstoppable Login flow
+
+Swarm: https://gateway.ethswarm.org/access/7b8badd156a2ffc1aa30ac63e763d7802cc464f11d9c6a70155cd6b0423a0892</br>
+Discord Handle: DaniiiRix#3285<br />
+Email: danielrix01@protonmail.com<br />
+Unstoppable Domain: uns-devtest-3fd73c.crypto
+
 Blite is a decentralized forum where anybody may submit information that has been socially vetted without fear of censorship. The name of the site is a pun on the phrase "I read it, therefore I share it."
 
 Github: DaniiRix <br/>
