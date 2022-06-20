@@ -1,35 +1,26 @@
-const { Contract } = require('ethers');
 import { useEffect, useState } from 'react';
 
 import { store } from '../utils';
-import { abi } from '../contracts/blite';
-import { useWeb3Modal } from '../hooks/web3';
-
-const address = '0xbb48b22feA8E4b0B36bD5eFDE06Cd37B993d3855';
+import Web3Context from './web3Context.js';
+import { useContext } from 'react';
 
 const UploadBlite = ({ setBlites }) => {
-  const { provider, signer, error } = useWeb3Modal();
+  const { contract, address, setAddress } = useContext(Web3Context);
 
   const [title, setTitle] = useState('');
   const [value, setValue] = useState('');
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // For read access
-  const contract_read = new Contract(address, abi, provider);
-
-  // For write access
-  const contract_write = new Contract(address, abi, signer);
-
   const fetchAllBlites = async () => {
     let temp = [];
     let allBlites = 0;
-    allBlites = await contract_read.getTotalBlites();
+    allBlites = await contract.methods.getTotalBlites().call();
 
     allBlites = parseInt(allBlites, 16);
 
     for (let i = 1; i <= allBlites; i++) {
-      const blite = await contract_read.getBlite(i);
+      const blite = await contract.methods.getBlite(i).call();
       temp.push(blite);
     }
     temp = temp.filter(Boolean);
@@ -39,35 +30,41 @@ const UploadBlite = ({ setBlites }) => {
 
   useEffect(() => {
     let fetchDataInterval;
-    if (provider && !error) {
+
+    if (contract) {
       fetchAllBlites();
       fetchDataInterval = setInterval(() => {
         fetchAllBlites();
       }, 10000);
+      return () => {
+        clearInterval(fetchDataInterval);
+      };
     }
-    return () => {
-      clearInterval(fetchDataInterval);
-    };
-  }, [provider, error]);
+  }, [contract]);
 
   const uploadBlite = async () => {
-    if (title && value && file && !error) {
+    if (title && value && file) {
       setLoading(true);
       try {
+        const accounts = await ethereum.request({
+          method: 'eth_requestAccounts',
+        });
+        setAddress(accounts[0]);
+
         const date = new Date().toDateString();
-        const address = await signer.getAddress();
         const cid = await store(file, title, value, date, address);
-        const tx = await contract_write.storeBlite(cid.cid);
+        const tx = await contract.methods
+          .storeBlite(cid.cid)
+          .send({ from: address });
 
         alert('Blite added successfully');
-        const receipt = await tx.wait();
-        console.log(`Transaction confirmed in block ${receipt.blockNumber}`);
+        console.log(`Transaction confirmed: ${tx}`);
 
         setFile(null);
         setTitle('');
         setValue('');
       } catch (error) {
-        console.log(error);
+        console.error(error);
       } finally {
         setLoading(false);
       }

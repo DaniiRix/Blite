@@ -1,5 +1,3 @@
-import React from 'react';
-
 import dynamic from 'next/dynamic';
 const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
   ssr: false,

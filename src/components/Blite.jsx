@@ -22,7 +22,7 @@ const Blite = ({ blite }) => {
     <div className="shadow-md py-3 rounded-xl flex flex-col">
       <div className="flex items-center p-3">
         <Identicon string={data.title} size={40} />
-        <p className="text-xl text-left flex-1 mx-3">{data.owner}</p>
+        <p className="text-xl text-left flex-1 mx-3">{data.author}</p>
         <p className="text-xl">{data.date}</p>
       </div>
       <img src={data.url} alt="image" className="w-full h-full rounded-xl" />
