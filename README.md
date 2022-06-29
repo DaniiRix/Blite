@@ -21,10 +21,6 @@ Blite has used the IPFS underpinning technology to store the details of each bli
 
 Blite has used the service of web3.storage to interact with the IPFS, we make a directory of the details.json which contains the details of blite along with the path of the image attached to it.
 
-The code for this part is written in src/utils/index.js
-
-#### Video: [https://www.dropbox.com/s/xss5nooju7qmj4n/Blite.mov?dl=0](https://www.dropbox.com/s/xss5nooju7qmj4n/Blite.mov?dl=0)
-
 #### Running the app
 
 ## Getting Started
