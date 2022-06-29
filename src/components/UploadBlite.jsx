@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { store } from '../utils';
 import Web3Context from './web3Context.js';
 import { useContext } from 'react';
+import Web3 from 'web3';
 
 const UploadBlite = ({ setBlites }) => {
   const { contract, address, setAddress } = useContext(Web3Context);
@@ -55,7 +56,7 @@ const UploadBlite = ({ setBlites }) => {
         const cid = await store(file, title, value, date, address);
         const tx = await contract.methods
           .storeBlite(cid.cid)
-          .send({ from: address });
+          .send({ from: address, gasPrice: Web3.utils.toWei('4', 'gwei') });
 
         alert('Blite added successfully');
         console.log(`Transaction confirmed: ${tx}`);

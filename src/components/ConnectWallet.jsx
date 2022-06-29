@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Blockies from 'react-blockies';
 import Web3 from 'web3';
 import UAuth from '@uauth/js';
+const { default: Resolution } = require('@unstoppabledomains/resolution');
 
 import Web3Context from './web3Context.js';
 import { abi } from '../contracts/blite';
 import { useContext } from 'react';
 
+const resolution = new Resolution();
 const deployedAddress = '0xbb48b22feA8E4b0B36bD5eFDE06Cd37B993d3855';
 
 const truncateAddress = (address) => {
@@ -23,7 +25,9 @@ const uauth = new UAuth({
 
 const ConnectWallet = () => {
   const [haveMetamask, sethaveMetamask] = useState(true);
-  const { address, setAddress, setContract } = useContext(Web3Context);
+  const [search, setSearch] = useState('');
+  const { address, setAddress, setContract, setFilteredAddr } =
+    useContext(Web3Context);
 
   useEffect(() => {
     const { ethereum } = window;
@@ -82,18 +86,43 @@ const ConnectWallet = () => {
     }
   };
 
+  const resolve = async (domain) => {
+    try {
+      const address = await resolution.addr(domain, 'ETH');
+      setFilteredAddr(address);
+    } catch (error) {
+      console.error(error);
+      alert('Domain not found');
+      setFilteredAddr(null);
+    }
+  };
+
   return (
     <div className="flex items-center">
-      {address && (
-        <Blockies
-          className="rounded-full"
-          seed={address.toLowerCase()}
-          size={10}
-          scale={3}
-        />
-      )}
       {address ? (
-        <div className="mx-1">{truncateAddress(address)}</div>
+        <div className="mx-1 flex items-center">
+          <input
+            placeholder="Search user..."
+            className="border px-4 py-1 mx-2 rounded-xl outline-none hover:border-gray-300 focus:border-gray-300"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && search.length > 0) {
+                e.preventDefault();
+                resolve(search);
+              } else {
+                setFilteredAddr(null);
+              }
+            }}
+          />
+          <Blockies
+            className="rounded-full"
+            seed={address.toLowerCase()}
+            size={10}
+            scale={3}
+          />
+          <p className="mx-1">{truncateAddress(address)}</p>
+        </div>
       ) : (
         <div>
           <button

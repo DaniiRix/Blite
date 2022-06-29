@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
   const [isMobile, setIsMobile] = useState(false);
   const [address, setAddress] = useState(null);
   const [contract, setContract] = useState(null);
+  const [filteredAddr, setFilteredAddr] = useState(null);
 
   useEffect(() => {
     setIsMobile(
@@ -27,7 +28,14 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Web3Context.Provider
-        value={{ address, contract, setAddress, setContract }}
+        value={{
+          address,
+          contract,
+          filteredAddr,
+          setAddress,
+          setContract,
+          setFilteredAddr,
+        }}
       >
         <Navbar />
         <Component {...pageProps} isMobile={isMobile} />
