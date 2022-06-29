@@ -1,11 +1,8 @@
 ## Blite
 
-<video width="320" height="240" controls>
-  <source src="/demo.mov" type="video/mov">
-Your browser does not support the video tag.
-</video>
-
 ### Integrating Login with Unstoppable and UNS Domain Resolution API for tipping authors
+
+VIDEO DEMO: https://www.dropbox.com/s/d4qeu01y74rtg0i/demo.mov?dl=0
 
 Discord Handle: DaniiiRix#3285<br />
 Email: danielrix01@protonmail.com<br />
