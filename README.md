@@ -1,14 +1,12 @@
 ## Blite
 
+<video width="320" height="240" controls>
+  <source src="/demo.mov" type="video/mov">
+Your browser does not support the video tag.
+</video>
 
+### Integrating Login with Unstoppable and UNS Domain Resolution API for tipping authors
 
-https://user-images.githubusercontent.com/105014295/174585836-588202cf-a637-499c-b4b9-fd9ccaeaa3d9.mp4
-
-
-
-### Unstoppable Login flow
-
-Swarm: https://gateway.ethswarm.org/access/7b8badd156a2ffc1aa30ac63e763d7802cc464f11d9c6a70155cd6b0423a0892</br>
 Discord Handle: DaniiiRix#3285<br />
 Email: danielrix01@protonmail.com<br />
 Unstoppable Domain: uns-devtest-3fd73c.crypto
